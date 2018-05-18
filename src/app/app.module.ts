@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { ProjectModule } from './project/project.module';
+import { TaskModule } from './task/task.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +19,8 @@ import { ProjectModule } from './project/project.module';
     AppRoutingModule,
     SharedModule,
     LoginModule,
-    ProjectModule
+    ProjectModule,
+    TaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]

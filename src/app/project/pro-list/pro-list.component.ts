@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { NewProComponent } from '../new-pro/new-pro.component';
+import { InviteComponent } from '../invite/invite.component';
 
 @Component({
   selector: 'app-pro-list',
@@ -30,5 +31,9 @@ export class ProListComponent implements OnInit {
 
   openNewProjectDialog(){
     const dialogRef = this.dialog.open(NewProComponent);
+  }
+  launclInviteDialog(){
+    const dialogRef = this.dialog.open(InviteComponent);
+    
   }
 }
