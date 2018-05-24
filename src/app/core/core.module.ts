@@ -9,7 +9,7 @@ import { HttpModule } from '@angular/http';
 import {MdIconRegistry} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import {loadSvgResources} from '../utils/svg.utils';
-
+import 'hammerjs';
 @NgModule({
   imports: [
     SharedModule,

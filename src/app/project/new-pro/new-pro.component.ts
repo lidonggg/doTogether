@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MD_DIALOG_DATA, MdDialog, MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-new-pro',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-pro.component.scss']
 })
 export class NewProComponent implements OnInit {
-
-  constructor() { }
+  title = '';
+  constructor(@Inject(MD_DIALOG_DATA) private data,private dialogRef:MdDialogRef<NewProComponent>) { }
 
   ngOnInit() {
+    this.title = this.data.title;
   }
 
 }

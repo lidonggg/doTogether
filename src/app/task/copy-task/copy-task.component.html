@@ -1,0 +1,14 @@
+<form>
+  <h2 md-dialog-title>移动所有</h2>
+  <div md-dialog-content>
+    <md-select placeholder="移动到">
+      <md-option *ngFor="let list of lists">
+        {{list.name}}
+      </md-option>
+    </md-select>
+  </div>
+  <div md-dialog-actions>
+    <button type="button" md-raised-button color="primary">保存</button>
+    <button type="button" md-dialog-close md-button>取消</button>
+  </div>
+</form>
