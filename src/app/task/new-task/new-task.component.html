@@ -10,16 +10,16 @@
       </md-radio-button>
     </md-radio-group>
     <md-input-container color="accent" class="full-width">
-      <input  mdInput  [mdDatepicker]="dueDatepicker" type='password' placeholder="截止日期">
+      <input  mdInput  [mdDatepicker]="reminderDatepicker" type='text' placeholder="发起日期">
+      <button type="button" mdSuffix [mdDatepickerToggle]="reminderDatepicker">
+      </button>
+    </md-input-container>
+    <md-input-container color="accent" class="full-width">
+      <input  mdInput  [mdDatepicker]="dueDatepicker" type='text' placeholder="截止日期">
       <button type="button" mdSuffix [mdDatepickerToggle]="dueDatepicker">
       </button>
     </md-input-container>
     <md-datepicker #dueDatepicker></md-datepicker>
-    <md-input-container color="accent" class="full-width">
-      <input  mdInput  [mdDatepicker]="reminderDatepicker" type='password' placeholder="发起日期">
-      <button type="button" mdSuffix [mdDatepickerToggle]="reminderDatepicker">
-      </button>
-    </md-input-container>
     <md-datepicker #reminderDatepicker></md-datepicker>
   </div>
   <div md-dialog-actions>

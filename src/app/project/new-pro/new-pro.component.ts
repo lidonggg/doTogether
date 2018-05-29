@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,ChangeDetectionStrategy } from '@angular/core';
 import { MD_DIALOG_DATA, MdDialog, MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-new-pro',
   templateUrl: './new-pro.component.html',
-  styleUrls: ['./new-pro.component.scss']
+  styleUrls: ['./new-pro.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewProComponent implements OnInit {
   title = '';
@@ -14,4 +15,7 @@ export class NewProComponent implements OnInit {
     this.title = this.data.title;
   }
 
+  onClick(){
+    this.dialogRef.close(this.title);
+  }
 }

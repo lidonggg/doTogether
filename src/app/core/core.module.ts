@@ -6,15 +6,20 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
-import {MdIconRegistry} from '@angular/material';
-import {DomSanitizer} from '@angular/platform-browser';
-import {loadSvgResources} from '../utils/svg.utils';
+import { MdIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { loadSvgResources } from '../utils/svg.utils';
+import { AppRoutingModule } from '../app-routing.module';
+//import { ServicesModule } from '../services/services.module'
+
 import 'hammerjs';
+import 'rxjs/add/operator/take';
 @NgModule({
   imports: [
     SharedModule,
     BrowserAnimationsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule,
   ],
   declarations: [
     SidebarComponent,
@@ -25,7 +30,8 @@ import 'hammerjs';
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
  ]
 })
 export class CoreModule {

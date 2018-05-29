@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProListComponent } from './pro-list/pro-list.component';
 
 const routes: Routes = [
-    { path: 'project', component: ProListComponent }
+    { path: 'projects', component: ProListComponent }
 ];
 
 @NgModule({

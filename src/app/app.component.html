@@ -1,6 +1,6 @@
 <md-sidenav-container>
   <md-sidenav #sidenav mode='over'>
-    <app-sidebar>
+    <app-sidebar (navClick) = "sidenav.toggle()">
     </app-sidebar>
   </md-sidenav>
   <div class='site'>
@@ -10,6 +10,7 @@
     </header>
     <main>
       <router-outlet></router-outlet>
+      
     </main>
     <footer>
       <app-footer>

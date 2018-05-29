@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MdToolbarModule ,
   MdIconModule,
   MdButtonModule,
@@ -15,10 +16,12 @@ import { MdToolbarModule ,
   MdDatepickerModule,
   MdNativeDateModule,
   MdRadioModule,
-  MdSelectModule
+  MdSelectModule,
+  MdSidenavModule
 } from '@angular/material';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
-
+import { DirectiveModule } from '../directive/directive.module';
+import { ImageListSelectComponent } from './image-list-select/image-list-select.component'
 @NgModule({
   imports: [
     CommonModule,
@@ -37,9 +40,13 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MdRadioModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    MdSelectModule
+    MdSelectModule,
+    MdSidenavModule,
+    DirectiveModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [ConfirmDialogComponent],
+  declarations: [ConfirmDialogComponent, ImageListSelectComponent],
   exports:[
     CommonModule,
     MdToolbarModule,
@@ -58,7 +65,12 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MdRadioModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    MdSelectModule
+    MdSelectModule,
+    MdSidenavModule,
+    DirectiveModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ImageListSelectComponent
   ],
   entryComponents:[
     ConfirmDialogComponent
