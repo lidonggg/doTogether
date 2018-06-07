@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl,FormGroup,Validators, FormBuilder } from '@angular/forms'
+//import { AgeInputComponent } from '../../shared/age-input/age-input.component';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,16 @@ export class RegisterComponent implements OnInit {
       name:[],
       password:[],
       repeat:[],
-      avatar:[img]
+      avatar:[img],
+      dateOfBirth:['1990-01-01']
     })
+  }
+
+  onSubmit({value,valid},ev:Event){
+    ev.preventDefault();
+    if(!valid){
+      return ;
+    }
+    console.log(value);
   }
 }

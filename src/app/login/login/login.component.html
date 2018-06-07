@@ -26,12 +26,12 @@
             KNOW SOMETHING
           </md-card-title>
           <md-card-subtitle>
-            心成长的高度就是将来的成就
+            {{ quote.cn }}
           </md-card-subtitle>
         </md-card-header>
-        <img md-card-image  src="/assets/quote_fallback.jpg" alt="">
+        <img md-card-image  [src]="quote.pic" alt="quote image">
         <md-card-content>
-            The height of heart growth is the achievement of the future
+            {{ quote.en }}
         </md-card-content>
       </md-card>
  </form>

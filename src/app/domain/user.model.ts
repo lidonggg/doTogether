@@ -1,7 +1,12 @@
-export interface User{
+export interface User {
     id?: string;
     email: string;
-    password: string;
-    name: string;
-    avatar: string;
-}
+    name?: string;
+    password?: string;
+    avatar?: string;
+    projectIds?: string[];
+    taskIds?: string[];
+    //address?: Address;
+    //dateOfBirth?: string;
+    //identity?: Identity;
+  }

@@ -5,6 +5,9 @@ import { InviteComponent } from '../invite/invite.component';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { slideToRight } from '../../anims/router.anim';
 import { listAnimation } from '../../anims/list.anim';
+import { ProjectService } from '../../services/project.service';
+import * as _ from "lodash";
+import { Project } from '../../domain';
 @Component({
   selector: 'app-pro-list',
   templateUrl: './pro-list.component.html',
@@ -17,36 +20,32 @@ import { listAnimation } from '../../anims/list.anim';
 })
 export class ProListComponent implements OnInit {
   @HostBinding("@routeAnim") state;
-  projects = [
-    {
-      "id":1,
-      "name":"dotogether",
-      "desc":"adngag",
-      "coverImg":"assets/img/covers/bg.jpg"
-    },
-    {
-      "id":2,
-      "name":"dotogether",
-      "desc":"adngag",
-      "coverImg":"assets/img/covers/bg.jpg"
-    }
-  ]
+  projects;
   
-  constructor(private dialog: MdDialog,private cd: ChangeDetectorRef) {
+  constructor(private dialog: MdDialog,private cd: ChangeDetectorRef,private service$:ProjectService) {
     
   }
 
   ngOnInit() {
+    this.service$.get("2").subscribe(projects => {
+      this.projects=projects;
+      this.cd.markForCheck();
+    });
   }
 
   openNewProjectDialog(){
-    const dialogRef = this.dialog.open(NewProComponent,{data:{title:"新建项目"}});
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.projects = [... this.projects,{id:3,name:"new project",desc:"a new project",coverImg:"assets/img/covers/bg.jpg"},
-      {id:4,name:"new project",desc:"a new project",coverImg:"assets/img/covers/bg.jpg"}]
-    });
-    this.cd.markForCheck();
+    const selectedImg = `/assets/img/covers/${Math.floor(Math.random()*40)}_tn.jpg`;
+    const dialogRef = this.dialog.open(NewProComponent,{data:{thumbnails:this.getThumbnails(),img:selectedImg,title:"新建项目"}});
+    dialogRef.afterClosed()
+      .take(1)
+      .filter(n => n)
+      .switchMap(v => this.service$.add(v))
+      .map(val => ({...val,coverImg:this.buildImgSrc(val.coverImg)}))
+      .subscribe(project => {
+        this.projects = [...this.projects,project];
+        this.cd.markForCheck();
+      });
+    
   }
 
   launclInviteDialog(){
@@ -54,8 +53,19 @@ export class ProListComponent implements OnInit {
     
   }
 
-  launchUpdateDialog(){
-    const dialogRef = this.dialog.open(NewProComponent,{data:{title:"编辑项目"}});
+  launchUpdateDialog(project:Project){
+    const dialogRef = this.dialog.open(NewProComponent,{data:{thumbnails:this.getThumbnails(),project:project,title:"新建项目"}});
+    dialogRef.afterClosed()
+      .take(1)
+      .filter(n => n)
+      .switchMap(v => this.service$.add(v))
+      .map(val => ({...val,id:project.id,coverImg:this.buildImgSrc(val.coverImg)}))
+      .subscribe(project => {
+        const index = this.projects.map(p => p.id).indexOf(project.id);
+        this.projects = [...this.projects.slice(0,index),project,...this.projects.slice(index + 1)];
+        this.cd.markForCheck();
+      });
+    //const dialogRef = this.dialog.open(NewProComponent,{data:{title:"编辑项目"}});
   }
 
   launchDeleteDialog(project){
@@ -66,4 +76,14 @@ export class ProListComponent implements OnInit {
     });
     this.cd.markForCheck();
   }
+
+  private getThumbnails(){
+    return _.range(0,40)
+      .map(i => `/assets/img/covers/${i}_tn.jpg`);
+  }
+
+  private buildImgSrc(img:string): string{
+    return img.indexOf('_')>-1?img.split('_')[0]+".jpg":img;
+  }
+
 }

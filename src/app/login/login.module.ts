@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { ForgotComponent } from './forgot/forgot.component';
+//import { AgeInputComponent } from '../shared/age-input/age-input.component';
 @NgModule({
   imports: [
     SharedModule,
