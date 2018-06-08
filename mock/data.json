@@ -1,4 +1,28 @@
 {
+  "users": [
+    {
+      "password": "wp123456",
+      "name": "王芃",
+      "avatar": "avatars:svg-1",
+      "email": "wpcfan@163.com",
+      "id": "1",
+      "projectIds": [
+        "1"
+      ]
+      
+    },
+    {
+      "password": "Ls123456",
+      "name": "李四",
+      "avatar": "avatars:svg-2",
+      "email": "lisi@163.com",
+      "id": "2",
+      "projectIds": [
+        "1"
+      ]
+      
+    }
+  ],
   "quotes": [
     {
       "id": "0",
@@ -63,42 +87,27 @@
   ],
   "projects": [
     {
-      "name": "daf",
-      "desc": "gg",
-      "coverImg": "/assets/img/covers/2_tn.jpg",
-      "id": 1
+      "id": "1",
+      "name": "问题跟踪系统",
+      "desc": "用于 Bug 的内部跟踪和管理",
+      "coverImg": "/assets/img/covers/1.jpg",
+      "members": [
+        "2",
+        "1"
+      ]
     },
     {
-      "name": "daf",
-      "desc": "ggg",
-      "coverImg": "/assets/img/covers/15_tn.jpg",
-      "id": 2
-    },
-    {
-      "name": "da",
-      "desc": "f",
-      "coverImg": "/assets/img/covers/28_tn.jpg",
-      "id": 3
-    },
-    {
-      "name": "da",
-      "desc": "f",
-      "coverImg": "/assets/img/covers/1_tn.jpg",
-      "id": 4
-    },
-    {
-      "name": "faf",
-      "desc": "gaf",
-      "coverImg": "/assets/img/covers/23_tn.jpg",
-      "id": 5
-    },
-    {
-      "name": "faf",
-      "desc": "gaf",
-      "coverImg": "/assets/img/covers/1_tn.jpg",
-      "id": 6
+      "name": "某某公司 ERP 系统",
+      "desc": "为某某公司开发的定制化 ERP 系统",
+      "coverImg": "/assets/img/covers/20.jpg",
+      "members": [
+        "1"
+      ],
+      "id": "2"
+      
     }
   ],
+
   "taskLists": [
     {
       "name": "待办",

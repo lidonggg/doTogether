@@ -42,7 +42,7 @@ export class ProjectService {
         const uri = `${this.config.uri}/${this.domain}/${project.id}`;
         return deltask$.switchMap(_ => this.http
           .delete(uri)
-          .map(_ => project));
+          .mapTo(project));
     }
     
     get(userId: string): Observable<Project[]> {

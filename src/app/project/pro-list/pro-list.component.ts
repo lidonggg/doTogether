@@ -1,4 +1,4 @@
-import { Component, OnInit ,HostBinding,ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit ,HostBinding,ChangeDetectionStrategy, ChangeDetectorRef,OnDestroy} from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { NewProComponent } from '../new-pro/new-pro.component';
 import { InviteComponent } from '../invite/invite.component';
@@ -8,6 +8,7 @@ import { listAnimation } from '../../anims/list.anim';
 import { ProjectService } from '../../services/project.service';
 import * as _ from "lodash";
 import { Project } from '../../domain';
+import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-pro-list',
   templateUrl: './pro-list.component.html',
@@ -18,19 +19,25 @@ import { Project } from '../../domain';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProListComponent implements OnInit {
+export class ProListComponent implements OnInit ,OnDestroy{
   @HostBinding("@routeAnim") state;
   projects;
-  
+  sub:Subscription;
   constructor(private dialog: MdDialog,private cd: ChangeDetectorRef,private service$:ProjectService) {
     
   }
 
   ngOnInit() {
-    this.service$.get("2").subscribe(projects => {
+    this.sub = this.service$.get("2").subscribe(projects => {
       this.projects=projects;
       this.cd.markForCheck();
     });
+  }
+
+  ngOnDestroy(){
+    if(this.sub){
+      this.sub.unsubscribe();
+    }
   }
 
   openNewProjectDialog(){
@@ -49,7 +56,7 @@ export class ProListComponent implements OnInit {
   }
 
   launclInviteDialog(){
-    const dialogRef = this.dialog.open(InviteComponent);
+    const dialogRef = this.dialog.open(InviteComponent,{data:{members: []}});
     
   }
 
@@ -70,11 +77,16 @@ export class ProListComponent implements OnInit {
 
   launchDeleteDialog(project){
     const dialogRef = this.dialog.open(ConfirmDialogComponent,{data:{title:"删除项目",content:"确认删除？"}});
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.projects = this.projects.filter(p => p.id!==project.id)
+    dialogRef.afterClosed()
+      .take(1)
+      .filter(n => n)
+      .switchMap(_ => this.service$.del(project))
+      .subscribe(prj => {
+      //console.log(result);
+      this.projects = this.projects.filter(p => p.id!==prj.id);
+      this.cd.markForCheck();
     });
-    this.cd.markForCheck();
+    
   }
 
   private getThumbnails(){

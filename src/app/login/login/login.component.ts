@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
     "en": "I suddenly feel myself like a doll,acting all kinds of joys and sorrows.There are lots of shining silvery thread on my back,controlling all my action.",
     "pic": "/assets/img/quotes/0.jpg"
   };
-  private quoteService$: QuoteService;
-  constructor(private fb : FormBuilder ) {
-    //this.quoteService$.getQuote().subscribe(q => this.quote = q);
+  
+  constructor(private fb : FormBuilder ,private quoteService$: QuoteService) {
+    this.quoteService$.getQuote().subscribe(q => this.quote = q);
   }
 
   ngOnInit() {
